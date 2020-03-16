@@ -3,10 +3,10 @@
 #include <math.h>
 #include <locale.h>
 
-/*Relatório: O programa está dando erro quando recebe o primeiro número como par.*/
+/*RelatÃ³rio: Testando a execuÃ§Ã£o do cÃ³digo, constatei que hÃ¡ uma falha em um caso especÃ­fico de entrada. Quando o primeiro nÃºmero Ã© par, exclusivamente, e hÃ¡ uma sequÃªncia de outros pares, a lista impressa nÃ£o mostra o Ãºltimo nÃºmero par da sequÃªncia, isto se nÃ£o ouver outro nÃºmero Ã­mpar fora o '999' que finaliza o laÃ§o de repetiÃ§Ã£o.*/
 
 struct lista{
-	int num, ParImpar; //Número inteiro qualquer e parâmetro para guardar se o número é par ou ímpar.
+	int num, ParImpar; //NÃºmero inteiro qualquer e parÃ¢metro para guardar se o nÃºmero Ã© par ou Ã­mpar.
 	struct lista *prox;
 };
 
@@ -16,48 +16,48 @@ main(){
 
 	setlocale(LC_ALL,"Portuguese");
 
-	Lista *novo, *pri0, *pri1, *aux, *aux2; //pri0 indica o início dos números pares. pri1 para os ímpares. aux2 é para guardar o número anterior a aux
+	Lista *novo, *pri0, *pri1, *aux, *aux2; //pri0 indica o inÃ­cio dos nÃºmeros pares. pri1 para os Ã­mpares. aux2 Ã© para guardar o nÃºmero anterior a aux
 
 	pri0=NULL;
 	pri1=NULL;
 
 	novo=(Lista*)malloc(sizeof(Lista));
-	printf("*O programa roda até recebe o valor '999'*\n");
-	printf("Digite um número: ");
+	printf("*O programa roda atÃ© recebe o valor '999'*\n");
+	printf("Digite um nÃºmero: ");
 	scanf("%i", &novo->num);	
 	
 	if(novo->num==999){
-		printf("\nLista:\t%i\tEspaço na memória: %i\nFim.\n", novo->num);
-	//Se o primeiro número digitado for 999, o programa não executa mais nada (para evitar processamento desnecessário)
+		printf("\nLista:\t%i\tEspaÃ§o na memÃ³ria: %i\nFim.\n", novo->num);
+	//Se o primeiro nÃºmero digitado for 999, o programa nÃ£o executa mais nada (para evitar processamento desnecessÃ¡rio)
 	}
 	
-	else if(novo->num!=999){ //se o primeiro número não for 999, o programa roda
+	else if(novo->num!=999){ //se o primeiro nÃºmero nÃ£o for 999, o programa roda
 	
 		novo->ParImpar=(novo->num%2);
-		novo->prox=NULL;  //O primeiro número receberá como prox, NULL. Não importa se for par ou ímpar
+		novo->prox=NULL;  //O primeiro nÃºmero receberÃ¡ como prox, NULL. NÃ£o importa se for par ou Ã­mpar
 	
-		if(novo->ParImpar!=0){ //Senão, se for ímpar...
-			printf("Este número é ímpar.\n");
+		if(novo->ParImpar!=0){ //SenÃ£o, se for Ã­mpar...
+			printf("Este nÃºmero Ã© Ã­mpar.\n");
 			pri1=novo;
 		}
 		else if(novo->ParImpar==0){ //Se for par...
-			printf("Este número é par.\n");
+			printf("Este nÃºmero Ã© par.\n");
 			pri0=novo;
 		}
 
-		//DEPOIS DO PRIMEIRO NÚMERO
+		//DEPOIS DO PRIMEIRO NÃšMERO
 
 		while(novo->num!=999){
 		
 			novo=(Lista*)malloc(sizeof(Lista));
-			printf("Digite um número: ");
+			printf("Digite um nÃºmero: ");
 			scanf("%i", &novo->num);
 			novo->ParImpar=(novo->num%2);
 			
-			//INSERÇÃO DE PARES
+			//INSERÃ‡ÃƒO DE PARES
 
-			if (novo->ParImpar==0){ //Se for par a inserção será no fim dos pares
-				printf("Este número é par.\n");
+			if (novo->ParImpar==0){ //Se for par a inserÃ§Ã£o serÃ¡ no fim dos pares
+				printf("Este nÃºmero Ã© par.\n");
 				if (pri0==NULL){
 					pri0=novo;
 				}
@@ -67,11 +67,11 @@ main(){
 					}
 					else if(pri0->prox!=NULL){
 						aux=pri0;
-						while((aux->prox!=NULL) && (aux->ParImpar==0)){ //enquanto o número for par e o próximo for diferente de NULL, aux recebe o próximo
-							aux2=aux; //Guardará o anterior de aux2 para o caso de chegar em um número ímpar
+						while((aux->prox!=NULL) && (aux->ParImpar==0)){ //enquanto o nÃºmero for par e o prÃ³ximo for diferente de NULL, aux recebe o prÃ³ximo
+							aux2=aux; //GuardarÃ¡ o anterior de aux2 para o caso de chegar em um nÃºmero Ã­mpar
 							aux=aux->prox;
-						}//quando encontrar o fim da lista (que será nulo OU um número ímpar)
-						aux2->prox=novo; //o próximo do último par será o 'novo', que é ímpar
+						}//quando encontrar o fim da lista (que serÃ¡ nulo OU um nÃºmero Ã­mpar)
+						aux2->prox=novo; //o prÃ³ximo do Ãºltimo par serÃ¡ o 'novo', que Ã© Ã­mpar
 					}
 				}
 				if (pri1==NULL)
@@ -81,11 +81,11 @@ main(){
 				}
 			}
 
-			//INSERÇÃO DE ÍMPARES
+			//INSERÃ‡ÃƒO DE ÃMPARES
 
-			else if (novo->ParImpar!=0){ //Se for ímpar, a inserção é no início
+			else if (novo->ParImpar!=0){ //Se for Ã­mpar, a inserÃ§Ã£o Ã© no inÃ­cio
 			
-				printf("Este número é ímpar.\n"); // Será adicionado depois dos pares e antes dos ímpares que já estiverem na lista.
+				printf("Este nÃºmero Ã© Ã­mpar.\n"); // SerÃ¡ adicionado depois dos pares e antes dos Ã­mpares que jÃ¡ estiverem na lista.
 				novo->prox=pri1;
 				pri1=novo;
 
@@ -95,27 +95,27 @@ main(){
 					}
 					else if(pri0->prox!=NULL){
 						aux=pri0;
-						while((aux->prox!=NULL) && (aux->ParImpar==0)){ //enquanto o número for par e o próximo for diferente de NULL, aux recebe o próximo
-							aux2=aux; //Guardará o anterior de aux2 para o caso de chegar em um número ímpar
+						while((aux->prox!=NULL) && (aux->ParImpar==0)){ //enquanto o nÃºmero for par e o prÃ³ximo for diferente de NULL, aux recebe o prÃ³ximo
+							aux2=aux; //GuardarÃ¡ o anterior de aux2 para o caso de chegar em um nÃºmero Ã­mpar
 							aux=aux->prox;
-						}//quando encontrar o fim da lista (que será nulo OU um número ímpar)
-						aux2->prox=novo; //o próximo do último par será o 'novo', que é ímpar
+						}//quando encontrar o fim da lista (que serÃ¡ nulo OU um nÃºmero Ã­mpar)
+						aux2->prox=novo; //o prÃ³ximo do Ãºltimo par serÃ¡ o 'novo', que Ã© Ã­mpar
 					}
 				}
 			}
-		} //Finaliza o laço
+		} //Finaliza o laÃ§o
 
-		//SAÍDA DE DADOS
+		//SAÃDA DE DADOS
 		printf("\nLista:\n");
 		if(pri0!=NULL)
 			aux=pri0;
 		else if (pri0==NULL)
 			aux=pri1;
 		while(aux->prox!=NULL){
-			printf("\t%i\t Espaço na memória: %i\n", aux->num, aux);
+			printf("\t%i\t EspaÃ§o na memÃ³ria: %i\n", aux->num, aux);
 			aux=aux->prox;
 		}
-		printf("\t%i\t Espaço na memória: %i\n", aux->num, aux);
+		printf("\t%i\t EspaÃ§o na memÃ³ria: %i\n", aux->num, aux);
 		printf("\nFim.\n");
 	}
 }
